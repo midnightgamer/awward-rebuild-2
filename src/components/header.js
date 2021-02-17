@@ -1,20 +1,23 @@
 import React from "react"
 //Styled Component
-import { HeaderNav,Logo,Menu } from "../styles/headerStyle"
+import { HeaderNav, Logo, Menu } from "../styles/headerStyle"
 import { Container, Flex } from "../styles/globalStyle"
 import { Link } from "gatsby"
+import { useGlobalStateContext } from "../context/globalContext"
 
 const Header = () => {
+  const { currentTheme } = useGlobalStateContext();
   return (
     <HeaderNav>
       <Container>
+        {console.log(currentTheme)}
         <Flex spaceBetween noHeight>
           <Logo>
-            <Link to={'/'}>
+            <Link to={"/"}>
               FURR
             </Link>
             <span></span>
-            <Link to={'/'}>
+            <Link to={"/"}>
               W
             </Link>
           </Logo>
