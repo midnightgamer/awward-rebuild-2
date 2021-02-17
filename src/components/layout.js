@@ -1,8 +1,10 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-//Styled Component
 
+
+import Header from "./header"
+//Styled Component
 import { createGlobalStyle, ThemeProvider } from "styled-components"
 import { normalize } from "styled-normalize"
 
@@ -44,15 +46,18 @@ const Layout = ({ children }) => {
   const darkTheme = {
     background: "#000",
     text: "#fff",
+    red:'#ea291e'
   }
   const lightTheme = {
     text: "#000",
     background: "#fff",
+    red:'#ea291e'
   }
 
-  return <ThemeProvider theme={darkTheme}>
+  return <ThemeProvider theme={lightTheme}>
 
     <GlobalStyle />
+    <Header/>
     <main>{children}</main>
   </ThemeProvider>
 }
