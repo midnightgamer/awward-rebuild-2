@@ -8,6 +8,8 @@ import Header from "./header"
 import { createGlobalStyle, ThemeProvider } from "styled-components"
 import { normalize } from "styled-normalize"
 
+//Context
+import { useGlobalStateContext } from "../context/globalContext"
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -46,18 +48,20 @@ const Layout = ({ children }) => {
   const darkTheme = {
     background: "#000",
     text: "#fff",
-    red:'#ea291e'
+    red: "#ea291e",
   }
   const lightTheme = {
     text: "#000",
     background: "#fff",
-    red:'#ea291e'
+    red: "#ea291e",
   }
 
-  return <ThemeProvider theme={lightTheme}>
+  const { currentTheme } = useGlobalStateContext()
+
+  return <ThemeProvider theme={currentTheme === "light" ? lightTheme : darkTheme}>
 
     <GlobalStyle />
-    <Header/>
+    <Header />
     <main>{children}</main>
   </ThemeProvider>
 }
