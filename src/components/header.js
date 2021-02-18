@@ -7,7 +7,7 @@ import { Link } from "gatsby"
 //Context
 import { useGlobalStateContext, useGlobalDispatchContext } from "../context/globalContext"
 
-const Header = () => {
+const Header = ({onCursor}) => {
   const { currentTheme } = useGlobalStateContext()
 
   const dispatch = useGlobalDispatchContext()
@@ -30,13 +30,19 @@ const Header = () => {
       transition={{ duration: 1, ease: [.6, .05, -0.01, .9] }}
     >
       <Container>
-        {console.log(currentTheme)}
         <Flex spaceBetween noHeight>
-          <Logo>
+          <Logo
+            onMouseEnter={()=> onCursor('hovered')}
+            onMouseLeave={()=> onCursor()}
+          >
             <Link to={"/"}>
               FURR
             </Link>
-            <span onClick={toggleTheme} />
+            <span
+              onClick={toggleTheme}
+              onMouseEnter={()=> onCursor('pointer')}
+              onMouseLeave={()=> onCursor()}
+            />
             <Link to={"/"}>
               W
             </Link>

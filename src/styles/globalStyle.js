@@ -54,10 +54,19 @@ export const Cursor = styled.div`
   height: 32px;
   border-radius: 100%;
   background: ${props => props.theme.red};
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   transition: all .1s ease-in-out;
-  transition-property: width, height,border;
-  will-change:  width, height,border,transform;
+  transition-property: width, height, border;
+  will-change: width, height, border, transform;
   pointer-events: none;
   z-index: 999;
+  &.hovered {
+    background: transparent;
+    width: 56px;
+    height: 56px;
+    border: 4px solid ${props => props.theme.red};
+  }
+  &.pointer{
+    border: 4px solid ${props => props.theme.text};
+  }
 `

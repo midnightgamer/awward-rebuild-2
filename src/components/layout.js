@@ -9,14 +9,14 @@ import { createGlobalStyle, ThemeProvider } from "styled-components"
 import { normalize } from "styled-normalize"
 
 //Context
-import { useGlobalStateContext } from "../context/globalContext"
+import { useGlobalStateContext, useGlobalDispatchContext } from "../context/globalContext"
 import CustomCursor from "./CustomCursor"
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
   * {
-    text-decoration: none
-    //cursor:none;
+    text-decoration: none;
+    cursor: none;
   }
 
   html {
@@ -31,9 +31,8 @@ const GlobalStyle = createGlobalStyle`
     overscroll-behavior: none;
     overflow-x: hidden;
   }
-
-
 `
+
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -46,6 +45,7 @@ const Layout = ({ children }) => {
       }
   `)
 
+
   const darkTheme = {
     background: "#000",
     text: "#fff",
@@ -57,13 +57,19 @@ const Layout = ({ children }) => {
     red: "#ea291e",
   }
 
-  const { currentTheme } = useGlobalStateContext()
+  const { currentTheme, cursorStyles } = useGlobalStateContext()
+  const dispatch = useGlobalDispatchContext();
+
+  const onCursor = cursorType => {
+    cursorType = (cursorStyles.includes(cursorType) && cursorType) || false
+    dispatch({ type: "CURSOR_TYPE", cursorType: cursorType })
+  }
 
   return <ThemeProvider theme={currentTheme === "light" ? lightTheme : darkTheme}>
 
     <GlobalStyle />
-    <CustomCursor/>
-    <Header />
+    <CustomCursor />
+    <Header onCursor={onCursor} />
     <main>{children}</main>
   </ThemeProvider>
 }
