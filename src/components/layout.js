@@ -10,6 +10,7 @@ import { normalize } from "styled-normalize"
 
 //Context
 import { useGlobalStateContext } from "../context/globalContext"
+import CustomCursor from "./CustomCursor"
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -61,6 +62,7 @@ const Layout = ({ children }) => {
   return <ThemeProvider theme={currentTheme === "light" ? lightTheme : darkTheme}>
 
     <GlobalStyle />
+    <CustomCursor/>
     <Header />
     <main>{children}</main>
   </ThemeProvider>
