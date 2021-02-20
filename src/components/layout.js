@@ -11,6 +11,7 @@ import { normalize } from "styled-normalize"
 //Context
 import { useGlobalStateContext, useGlobalDispatchContext } from "../context/globalContext"
 import CustomCursor from "./CustomCursor"
+import Navigation from "./Navigation"
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -58,18 +59,21 @@ const Layout = ({ children }) => {
   }
 
   const { currentTheme, cursorStyles } = useGlobalStateContext()
-  const dispatch = useGlobalDispatchContext();
+  const dispatch = useGlobalDispatchContext()
 
   const onCursor = cursorType => {
     cursorType = (cursorStyles.includes(cursorType) && cursorType) || false
     dispatch({ type: "CURSOR_TYPE", cursorType: cursorType })
   }
 
+  const [toggleMenu, setToggleMenu] = useState(false)
+
   return <ThemeProvider theme={currentTheme === "light" ? lightTheme : darkTheme}>
 
     <GlobalStyle />
-    <CustomCursor />
-    <Header onCursor={onCursor} />
+    <CustomCursor toggleMenu={toggleMenu}  />
+    <Header onCursor={onCursor} toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
+    <Navigation onCursor={onCursor} toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
     <main>{children}</main>
   </ThemeProvider>
 }
