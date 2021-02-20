@@ -46,18 +46,26 @@ const Layout = ({ children }) => {
       }
   `)
 
+  const [hamburger, setHamburgerPosition] = useState({
+    x: 0,
+    y: 0,
+  })
+
 
   const darkTheme = {
     background: "#000",
     text: "#fff",
     red: "#ea291e",
+    left: `${hamburger.x}px`,
+    top: `${hamburger.y}px`,
   }
   const lightTheme = {
     text: "#000",
     background: "#fff",
     red: "#ea291e",
+    left: `${hamburger.x}px`,
+    top: `${hamburger.y}px`,
   }
-
   const { currentTheme, cursorStyles } = useGlobalStateContext()
   const dispatch = useGlobalDispatchContext()
 
@@ -69,10 +77,10 @@ const Layout = ({ children }) => {
   const [toggleMenu, setToggleMenu] = useState(false)
 
   return <ThemeProvider theme={currentTheme === "light" ? lightTheme : darkTheme}>
-
     <GlobalStyle />
-    <CustomCursor toggleMenu={toggleMenu}  />
-    <Header onCursor={onCursor} toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
+    <CustomCursor toggleMenu={toggleMenu} />
+    <Header hamburgerPosition={hamburger} setHamburger={setHamburgerPosition} onCursor={onCursor}
+            toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
     <Navigation onCursor={onCursor} toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
     <main>{children}</main>
   </ThemeProvider>

@@ -33,7 +33,7 @@ const HomeFeatured = ({ onCursor }) => {
                            hidden: { opacity: 0, y: 72 },
                          }}>
       <Container>
-        <Link>
+        <Link to={"/"}>
           <FeaturedContent
 
             onHoverStart={() => setHovered(!hovered)}

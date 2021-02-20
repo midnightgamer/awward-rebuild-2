@@ -4,6 +4,7 @@ import HomeBanner from "../components/Homepage/HomeBanner"
 import { useGlobalDispatchContext, useGlobalStateContext } from "../context/globalContext"
 import HomeContent from "../components/Homepage/HomeContent"
 import HomeFeatured from "../components/Homepage/HomeFeatured"
+import HomeAbout from "../components/Homepage/HomeAbout"
 
 const IndexPage = props => {
   const { currentTheme, cursorStyles } = useGlobalStateContext()
@@ -18,6 +19,7 @@ const IndexPage = props => {
     <HomeBanner onCursor={onCursor} />
     <HomeContent />
     <HomeFeatured onCursor={onCursor} />
+    <HomeAbout onCursor={onCursor}/>
   </Layout>
 }
 
